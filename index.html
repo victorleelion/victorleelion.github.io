@@ -284,6 +284,34 @@
     }
     .graduates-close:hover, .graduates-close:focus-visible { background: var(--navy-800); }
 
+    .models-modal {
+      position: fixed; z-index: 1200; inset: 0; overflow-y: auto; padding: 34px;
+      background: rgba(2, 8, 26, .94); backdrop-filter: blur(14px);
+    }
+    .models-modal[hidden] { display: none; }
+    .models-dialog { position: relative; width: min(1120px, 100%); margin: 0 auto; padding: 42px; border: 1px solid rgba(255,255,255,.14); border-radius: 30px; color: white; background: linear-gradient(145deg, #07163f, #0b245e); box-shadow: 0 36px 100px rgba(0,0,0,.45); }
+    .models-head { max-width: 760px; margin-bottom: 34px; }
+    .models-head .section-label { color: var(--cyan); }
+    .models-head h2 { margin-bottom: 12px; font-size: clamp(34px, 5vw, 58px); }
+    .models-head p { margin: 0; color: rgba(255,255,255,.6); }
+    .models-close {
+      position: absolute; z-index: 2; top: 18px; right: 18px; display: grid; place-items: center; width: 46px; height: 46px;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; color: white; background: rgba(255,255,255,.08); cursor: pointer; font-size: 28px; line-height: 1;
+    }
+    .models-close:hover, .models-close:focus-visible { background: rgba(255,255,255,.16); }
+    .models-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .model-group { padding: 24px; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: rgba(255,255,255,.055); }
+    .model-group h3 { margin-bottom: 17px; font-size: 18px; line-height: 1.3; color: white; }
+    .model-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .model-link { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 12px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; color: rgba(255,255,255,.78); background: rgba(3,11,36,.36); text-decoration: none; font-size: 13px; transition: border-color .2s, color .2s, transform .2s, background .2s; }
+    .model-link span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .model-link span:last-child { flex: 0 0 auto; color: var(--cyan); font-size: 16px; }
+    .model-link:hover, .model-link:focus-visible { transform: translateY(-1px); border-color: rgba(69,239,209,.4); color: white; background: rgba(69,239,209,.08); }
+    .model-group-featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 22px; background: linear-gradient(120deg, rgba(69,239,209,.13), rgba(115,76,255,.14)); }
+    .model-group-featured h3 { margin: 0; }
+    .model-group-featured .model-link { min-width: 280px; color: #061436; background: var(--cyan); font-weight: 800; }
+    .model-group-featured .model-link span:last-child { color: #061436; }
+
     .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
@@ -353,6 +381,13 @@
       .graduates-dialog figure { border-radius: 18px; }
       .graduates-dialog img { max-height: calc(100vh - 105px); }
       .graduates-close { top: -10px; right: -8px; width: 42px; height: 42px; }
+      .models-modal { padding: 10px; }
+      .models-dialog { padding: 52px 18px 22px; border-radius: 22px; }
+      .models-close { top: 10px; right: 10px; width: 40px; height: 40px; }
+      .models-grid { grid-template-columns: 1fr; }
+      .model-links { grid-template-columns: 1fr; }
+      .model-group-featured { grid-column: auto; grid-template-columns: 1fr; }
+      .model-group-featured .model-link { min-width: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -377,6 +412,7 @@
         <a href="#program">Программа</a>
         <a href="#cases">Кейсы</a>
         <a href="#experts">Эксперты</a>
+        <a href="#models" data-models-open>Модели</a>
         <a href="#graduates" data-graduates-open>Выпускники</a>
         <a class="nav-cta" href="https://gureev.pro" target="_blank" rel="noopener">Gureev.PRO</a>
       </nav>
@@ -619,6 +655,69 @@
     </div>
   </div>
 
+  <div class="models-modal" id="models" hidden>
+    <div class="models-dialog" role="dialog" aria-modal="true" aria-labelledby="models-title">
+      <button class="models-close" type="button" aria-label="Закрыть список моделей">×</button>
+      <div class="models-head">
+        <div class="section-label">Полезный каталог</div>
+        <h2 id="models-title">Список генеративных моделей</h2>
+        <p>Сервисы сгруппированы по назначению. Все ссылки открываются в новой вкладке.</p>
+      </div>
+      <div class="models-grid">
+        <section class="model-group" aria-labelledby="models-usa"><h3 id="models-usa">Базовые модели США</h3><div class="model-links">
+          <a class="model-link" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span>ChatGPT</span><span>↗</span></a>
+          <a class="model-link" href="https://claude.ai/" target="_blank" rel="noopener noreferrer"><span>Claude</span><span>↗</span></a>
+          <a class="model-link" href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer"><span>Google AI Studio</span><span>↗</span></a>
+          <a class="model-link" href="https://grok.com/" target="_blank" rel="noopener noreferrer"><span>Grok</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-china"><h3 id="models-china">Базовые модели Китая</h3><div class="model-links">
+          <a class="model-link" href="https://www.deepseek.com/" target="_blank" rel="noopener noreferrer"><span>DeepSeek</span><span>↗</span></a>
+          <a class="model-link" href="https://www.kimi.com/" target="_blank" rel="noopener noreferrer"><span>Kimi</span><span>↗</span></a>
+          <a class="model-link" href="https://chat.qwenlm.ai" target="_blank" rel="noopener noreferrer"><span>Qwen</span><span>↗</span></a>
+          <a class="model-link" href="https://z.ai/" target="_blank" rel="noopener noreferrer"><span>Z.ai</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-russia"><h3 id="models-russia">Базовые модели России</h3><div class="model-links">
+          <a class="model-link" href="https://yandex.cloud/ru/services/yandexgpt" target="_blank" rel="noopener noreferrer"><span>YandexGPT</span><span>↗</span></a>
+          <a class="model-link" href="https://giga.chat/" target="_blank" rel="noopener noreferrer"><span>GigaChat</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-platforms"><h3 id="models-platforms">Платформы с разными моделями</h3><div class="model-links">
+          <a class="model-link" href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer"><span>Perplexity</span><span>↗</span></a>
+          <a class="model-link" href="https://manus.im/app" target="_blank" rel="noopener noreferrer"><span>Manus</span><span>↗</span></a>
+          <a class="model-link" href="https://www.genspark.ai/" target="_blank" rel="noopener noreferrer"><span>Genspark</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-code"><h3 id="models-code">Кодовые агенты</h3><div class="model-links">
+          <a class="model-link" href="https://cursor.com/" target="_blank" rel="noopener noreferrer"><span>Cursor</span><span>↗</span></a>
+          <a class="model-link" href="https://opencode.ai/" target="_blank" rel="noopener noreferrer"><span>OpenCode</span><span>↗</span></a>
+          <a class="model-link" href="https://replit.com/" target="_blank" rel="noopener noreferrer"><span>Replit</span><span>↗</span></a>
+          <a class="model-link" href="https://antigravity.google/" target="_blank" rel="noopener noreferrer"><span>Google Antigravity</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-personal-code"><h3 id="models-personal-code">Персональные кодовые агенты</h3><div class="model-links">
+          <a class="model-link" href="https://claude.com/product/cowork" target="_blank" rel="noopener noreferrer"><span>Claude Cowork</span><span>↗</span></a>
+          <a class="model-link" href="https://autoclaw.z.ai/" target="_blank" rel="noopener noreferrer"><span>AutoClaw</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-personal"><h3 id="models-personal">Персональные ИИ-агенты</h3><div class="model-links">
+          <a class="model-link" href="https://openclaw.ai/" target="_blank" rel="noopener noreferrer"><span>OpenClaw</span><span>↗</span></a>
+          <a class="model-link" href="https://hermes-agent.org/" target="_blank" rel="noopener noreferrer"><span>Hermes Agent</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-builders"><h3 id="models-builders">Платформы для сборки агентов</h3><div class="model-links">
+          <a class="model-link" href="https://n8n.io/" target="_blank" rel="noopener noreferrer"><span>n8n</span><span>↗</span></a>
+          <a class="model-link" href="https://opal.google/" target="_blank" rel="noopener noreferrer"><span>Google Opal</span><span>↗</span></a>
+          <a class="model-link" href="https://platform.openai.com/agent-builder" target="_blank" rel="noopener noreferrer"><span>OpenAI Agent Builder</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group" aria-labelledby="models-visual"><h3 id="models-visual">Возможности визуализации</h3><div class="model-links">
+          <a class="model-link" href="https://www.seedance.ai/ru" target="_blank" rel="noopener noreferrer"><span>Seedance</span><span>↗</span></a>
+          <a class="model-link" href="https://suno.com/" target="_blank" rel="noopener noreferrer"><span>Suno</span><span>↗</span></a>
+          <a class="model-link" href="https://www.heygen.com/" target="_blank" rel="noopener noreferrer"><span>HeyGen</span><span>↗</span></a>
+          <a class="model-link" href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer"><span>ElevenLabs</span><span>↗</span></a>
+          <a class="model-link" href="https://www.runwayml.com" target="_blank" rel="noopener noreferrer"><span>Runway</span><span>↗</span></a>
+        </div></section>
+        <section class="model-group model-group-featured" aria-labelledby="models-all"><h3 id="models-all">Все модели в одном месте</h3>
+          <a class="model-link" href="https://docs.mlhub.ru/public/26a9c7f0-5aec-4daf-b104-2f63f474d423" target="_blank" rel="noopener noreferrer"><span>Открыть каталог MLHub</span><span>↗</span></a>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <script>
     (() => {
       const menuButton = document.querySelector('.menu-btn');
@@ -663,6 +762,34 @@
       });
       document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && !graduatesModal.hidden) closeGraduates();
+      });
+
+      const modelsModal = document.querySelector('.models-modal');
+      const modelsOpen = document.querySelector('[data-models-open]');
+      const modelsClose = document.querySelector('.models-close');
+      let modelsReturnFocus = null;
+      const openModels = () => {
+        modelsReturnFocus = document.activeElement;
+        modelsModal.hidden = false;
+        document.body.classList.add('modal-open');
+        modelsClose.focus();
+      };
+      const closeModels = () => {
+        modelsModal.hidden = true;
+        document.body.classList.remove('modal-open');
+        if (modelsReturnFocus) modelsReturnFocus.focus();
+      };
+      modelsOpen.addEventListener('click', event => {
+        event.preventDefault();
+        closeMenu();
+        openModels();
+      });
+      modelsClose.addEventListener('click', closeModels);
+      modelsModal.addEventListener('click', event => {
+        if (event.target === modelsModal) closeModels();
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !modelsModal.hidden) closeModels();
       });
 
       const tabs = [...document.querySelectorAll('[role="tab"]')];
